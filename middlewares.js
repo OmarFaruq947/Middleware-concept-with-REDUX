@@ -6,7 +6,7 @@ const delayActionMiddleware = (store) => (next) => (action) => {
 
         setTimeout(() => {
             next(action);
-        }, 2000);
+        }, 5000);
 
         return;
     }
@@ -14,30 +14,30 @@ const delayActionMiddleware = (store) => (next) => (action) => {
     return next(action);
 };
 
-const fetchTodosMiddleware = (store) => (next) => async (action) => {
-    if (action.type === "todos/fetchTodos") {
-        const response = await fetch(
-            "https://jsonplaceholder.typicode.com/todos?_limit=5"
-        );
+// const fetchTodosMiddleware = (store) => (next) => async (action) => {
+//     if (action.type === "todos/fetchTodos") {
+//         const response = await fetch(
+//             "https://jsonplaceholder.typicode.com/todos?_limit=5"
+//         );
 
-        const todos = await response.json();
+//         const todos = await response.json();
 
-        store.dispatch({
-            type: "todos/todoLoaded",
-            payload: todos,
-        });
+//         store.dispatch({
+//             type: "todos/todoLoaded",
+//             payload: todos,
+//         });
 
-        console.log(
-            `Number of updated todos: ${store.getState().todos.length}`
-        );
+//         console.log(
+//             `Number of updated todos: ${store.getState().todos.length}`
+//         );
 
-        return;
-    }
+//         return;
+//     }
 
-    return next(action);
-};
+//     return next(action);
+// };
 
 module.exports = {
     delayActionMiddleware,
-    fetchTodosMiddleware,
+    // fetchTodosMiddleware,
 };
